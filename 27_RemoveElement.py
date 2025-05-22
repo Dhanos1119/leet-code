@@ -8,9 +8,15 @@ class Solution:
                 left+=1
         return left
 if __name__ == "__main__":
-     nums=[3,2,2,3]
-     val=3
-     result=Solution().removeElement(nums,val)
-     print(nums)
+    s=Solution()
+    nums=[3,2,2,3]
+    val=3
+    print(s.removeElement(nums,val))
+    print(nums[:s.removeElement(nums,val)])
+
+
+
+
+ 
 
 
