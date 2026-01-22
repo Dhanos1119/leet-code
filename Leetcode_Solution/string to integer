@@ -1,35 +1,33 @@
-class Solution {
-    public int myAtoi(String s) {
-        int i = 0, n = s.length();
-        int sign = 1;
-        long result = 0;
+var myAtoi = function(s) {
+    let i = 0;
+    let sign = 1;
+    let result = 0;
+    const n = s.length;
 
-        // 1. Skip leading whitespaces
-        while (i < n && s.charAt(i) == ' ') {
-            i++;
-        }
-
-        // 2. Check sign
-        if (i < n && (s.charAt(i) == '+' || s.charAt(i) == '-')) {
-            sign = (s.charAt(i) == '-') ? -1 : 1;
-            i++;
-        }
-
-        // 3. Convert digits
-        while (i < n && Character.isDigit(s.charAt(i))) {
-            result = result * 10 + (s.charAt(i) - '0');
-
-            // 4. Handle overflow
-            if (sign * result > Integer.MAX_VALUE) {
-                return Integer.MAX_VALUE;
-            }
-            if (sign * result < Integer.MIN_VALUE) {
-                return Integer.MIN_VALUE;
-            }
-
-            i++;
-        }
-
-        return (int) (sign * result);
+    // 1. Skip leading spaces
+    while (i < n && s[i] === ' ') {
+        i++;
     }
-}
+
+    // 2. Check sign
+    if (i < n && (s[i] === '+' || s[i] === '-')) {
+        sign = s[i] === '-' ? -1 : 1;
+        i++;
+    }
+
+    // 3. Convert digits
+    while (i < n && s[i] >= '0' && s[i] <= '9') {
+        let digit = s[i] - '0';
+
+        // 4. Overflow check
+        if (result > Math.floor(2147483647 / 10) ||
+           (result === Math.floor(2147483647 / 10) && digit > 7)) {
+            return sign === 1 ? 2147483647 : -2147483648;
+        }
+
+        result = result * 10 + digit;
+        i++;
+    }
+
+    return result * sign;
+};
