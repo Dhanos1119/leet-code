@@ -1,0 +1,24 @@
+var convert = function (s, numRows) {
+    if (numRows === 1 || s.length <= numRows) return s;
+
+    // Step 1: Create rows
+    let rows = new Array(numRows).fill("").map(() => "");
+
+    let currentRow = 0;
+    let goingDown = false;
+
+    // Step 2: Traverse characters
+    for (let char of s) {
+        rows[currentRow] += char;
+
+        // Direction change (top or bottom)
+        if (currentRow === 0 || currentRow === numRows - 1) {
+            goingDown = !goingDown;
+        }
+
+        currentRow += goingDown ? 1 : -1;
+    }
+
+    // Step 3: Join rows
+    return rows.join("");
+};
