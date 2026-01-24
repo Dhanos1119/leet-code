@@ -28,7 +28,7 @@ var isMatch = function (s, p) {
             // case 2: '*'
             else if (p[j - 1] === '*') {
                 // zero occurrence of previous char
-                dp[i][j] = dp[i][j - 2];
+              
 
                 // one or more occurrence
                 if (p[j - 2] === '.' || p[j - 2] === s[i - 1]) {
